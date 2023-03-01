@@ -6,17 +6,17 @@ if (!isset($_GET['q'])){
     exit('Recherche incorrecte');
 }
 
+require_once 'functions.php';
 require_once 'data/users.php';
 ['q' => $searchedName] = $_GET;
 
 // Recherche les résultats dans $users
 $resultsContacts = array_filter($users, fn ($u) => (str_contains($u['name'], $searchedName) || str_contains($u['firstname'], $searchedName)));
 $nbResults = count($resultsContacts);
-require_once 'functions.php';
 require_once 'layout/header.php';
 
 ?>
-
+<a href="search.php?q=<?php echo $searchedName?>" class="m-5">Retour à la recherche</a>
 <h1 class="text-center mt-3">Résultat de la recherche</h1>
 
 <!-- Affichage des résultats -->
